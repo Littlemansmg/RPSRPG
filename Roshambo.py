@@ -23,25 +23,32 @@ Runs functions/classes from another python file.
 
 
 # imports
+import random as rand
 import time
 import os
 
 # vars
 choices = ["Rock", "Paper", "Scissors"]
 
+#function is calling other functions and returns nothing.
 def gameOption(option):
     if option == 1:
+        #ai game
         finisher(aiChoice(), aiChoice())
     elif option == 2:
+        #1 player game
         finisher(playerChoice(), aiChoice()),
     elif option == 3:
+        #2 player game
         finisher(playerChoice(),playerChoice())
 
+#callable function to get ai choice
 def aiChoice():
     a1 = rand.randint(0, 2)
     print(choices[a1])
     return a1
 
+#callable fucntion to get user choice
 def playerChoice():
     pPick = input("Rock: 1\n"
                 "Paper: 2\n"
@@ -49,64 +56,92 @@ def playerChoice():
     pPick = int(pPick) -1
     return pPick
 
+#winning logic that requires 2 paramaters.
 def finisher(player1, player2):
     # Rock wins
     if player1 == 0 and player2 == 2:
-        print("AI 1 wins!")
+        print("Player 1 wins!")
 
     # Rock loses
     elif player1 == 0 and player2 == 1:
-        print("AI 1 loses!")
+        print("Player 2 wins!")
 
     # Paper Wins
     elif player1 == 1 and player2 == 0:
-        print("AI 1 wins!")
+        print("Player 1 wins!")
 
     # Paper Loses
     elif player1 == 1 and player2 == 2:
-        print("AI 1 loses!")
+        print("Player 2 wins!")
 
     # Scissors wins
     elif player1 == 2 and player2 == 1:
-        print("AI 1 wins!")
+        print("Player 1 wins!")
 
     # Scissors loses
     elif player1 == 2 and player2 == 0:
-        print("AI 1 loses!")
+        print("Player 2 wins!")
 
     # if a tie happens
     else:
-        print("The AI's tied!")
+        print("The Players tied!")
 
 
 #PROGRAM RUN
 
+#Decide between regular game and RPG battle
+while True:
+    os.system('cls')
 
+    #catch a user error if they put in a letter or a wrong value
+    try:
+        gameType = input("What type of game would you like to play?\n"
+                         "  1: Regular Rock paper Scissors\n"
+                         "  2: Totally awesome RPG battle\n"
+                         "  3: Quit\n")
+        gameType = int(gameType)
 
-#while True:
-#    os.system('cls')
+    except (ValueError, TypeError):
+        print("That ain't gonna work here.\n")
+        time.sleep(3)
 
-#  REGULAR GAME
-#  Commented out for Fight testing.
-#    try:
-#        option = input("Would you like to do?\n"
-#                    "  1: ai vs ai\n"
-#                    "  2: player vs ai\n"
-#                    "  3: player vs player\n"
-#                    "  4: quit\n")
-#        option = int(option)
-#
-#        if option < 4 and option > 0:
-#            gameOption(option)
-#        elif option == 4:
-#            break
-#        else:
-#            print("Learn how to read, Idiot.")
-#    except (ValueError, TypeError):
-#        print("That ain't gonna work here.\n")
-#    time.sleep(3)
-#    os.system('cls')
+    # Run Game 1, 2 or quit
+    if gameType == 1:
 
+        # REGULAR GAME
+        while True:
+            os.system('cls')
 
+            # catch a user error if they put in a letter or a wrong value
+            try:
+                option = input("How would you like to play?\n"
+                               "  1: ai vs ai\n"
+                               "  2: player vs ai\n"
+                               "  3: player vs player\n"
+                               "  4: quit\n")
+                option = int(option)
+
+                #passes option to the gameOption function or quits.
+                if option < 4 and option > 0:
+                    gameOption(option)
+                elif option == 4:
+                    break
+                else:
+                    print("Learn how to read, Idiot.")
+            except (ValueError, TypeError):
+                print("That ain't gonna work here.\n")
+                time.sleep(3)
+                os.system('cls')
+
+    elif gameType == 2:
+        #Battle game
+        print("You got the fighting game!")
+
+    elif gameType == 3:
+        break
+
+    else:
+        print("Learn to read.")
+        time.sleep(3)
 
 
