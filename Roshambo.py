@@ -86,7 +86,6 @@ def finisher(player1, player2):
 #while True:
 #    os.system('cls')
 
-
 #  REGULAR GAME
 #  Commented out for Fight testing.
 #    try:
