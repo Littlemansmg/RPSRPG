@@ -23,7 +23,6 @@ Runs functions/classes from another python file.
 
 
 # imports
-import random as rand
 import time
 import os
 
@@ -79,9 +78,13 @@ def finisher(player1, player2):
     else:
         print("The AI's tied!")
 
+
 #PROGRAM RUN
-while True:
-    os.system('cls')
+
+
+
+#while True:
+#    os.system('cls')
 
 
 #  REGULAR GAME
