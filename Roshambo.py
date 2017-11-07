@@ -30,6 +30,7 @@ import os
 # vars
 choices = ["Rock", "Paper", "Scissors"]
 
+
 #function is calling other functions and returns nothing.
 def gameOption(option):
     if option == 1:
@@ -50,9 +51,10 @@ def aiChoice():
 
 #callable fucntion to get user choice
 def playerChoice():
-    pPick = input("Rock: 1\n"
-                "Paper: 2\n"
-                "Scissors: 3\n")
+    pPick = input("What do you pick?\n"
+                  "Rock: 1\n"
+                  "Paper: 2\n"
+                  "Scissors: 3\n")
     pPick = int(pPick) -1
     return pPick
 
