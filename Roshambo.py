@@ -91,19 +91,8 @@ def finisher(player1, player2):
 
 # BATTLE GAME FUNCTIONS
 
-def rock():
+def tackle():
     attack = rand.randrange(5, 10)
-    return attack
-
-def paper():
-    health = 50
-    attack = rand.randrange(5, 10)
-    return attack
-
-def scissors():
-    health = 50
-    attack = rand.randrange(5, 10)
-    return attack
 
 # PROGRAM RUN
 
@@ -160,9 +149,9 @@ while True:
         time.sleep(2)
         while True:
             os.system('cls')
-            oneattack = rock()
+            oneattack = tackle()
             oneattack = str(oneattack)
-            twoattack = paper()
+            twoattack = tackle()
             twoattack = str(twoattack)
             print(player1health,player2health)
             print("Rock did " + oneattack + " damage.\n")
