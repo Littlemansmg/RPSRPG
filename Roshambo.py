@@ -33,7 +33,7 @@ choices = ["Rock", "Paper", "Scissors"]
 # REGULAR GAME FUNCTIONS
 
 # function is calling other functions and returns nothing.
-def gameOption(option):
+def regGameOption(option):
     if option == 1:
         #ai game
         finisher(aiChoice(), aiChoice())
@@ -47,7 +47,10 @@ def gameOption(option):
 # callable function to get ai choice
 def aiChoice():
     a1 = rand.randint(0, 2)
+    print("AI picked")
     print(choices[a1])
+    print()
+    time.sleep(2)
     return a1
 
 # callable fucntion to get user choice
@@ -57,6 +60,8 @@ def playerChoice():
                   "Paper: 2\n"
                   "Scissors: 3\n")
     pPick = int(pPick) -1
+    print ("You picked " + choices[pPick])
+    time.sleep(2)
     return pPick
 
 # winning logic that requires 2 paramaters.
@@ -64,35 +69,43 @@ def finisher(player1, player2):
     # Rock wins
     if player1 == 0 and player2 == 2:
         print("Player 1 wins!")
+        time.sleep(3)
 
     # Rock loses
     elif player1 == 0 and player2 == 1:
         print("Player 2 wins!")
+        time.sleep(3)
 
     # Paper Wins
     elif player1 == 1 and player2 == 0:
         print("Player 1 wins!")
+        time.sleep(3)
 
     # Paper Loses
     elif player1 == 1 and player2 == 2:
         print("Player 2 wins!")
+        time.sleep(3)
 
     # Scissors wins
     elif player1 == 2 and player2 == 1:
         print("Player 1 wins!")
+        time.sleep(3)
 
     # Scissors loses
     elif player1 == 2 and player2 == 0:
         print("Player 2 wins!")
-
+        time.sleep(3)
     # if a tie happens
     else:
         print("The Players tied!")
+        time.sleep(3)
 
 # BATTLE GAME FUNCTIONS
 
 def tackle():
     attack = rand.randrange(5, 10)
+    attack = str(attack)
+    return attack
 
 # PROGRAM RUN
 
@@ -128,9 +141,9 @@ while True:
                                "  4: quit\n")
                 option = int(option)
 
-                # passes option to the gameOption function or quits.
+                # passes option to the regGameOption function or quits.
                 if option < 4 and option > 0:
-                    gameOption(option)
+                    regGameOption(option)
                 elif option == 4:
                     break
                 else:
@@ -142,37 +155,67 @@ while True:
 
     elif gameType == 2:
         os.system('cls')
-        # Battle game
+        while True:
+            try:
+                option = input("How would you like to play?\n"
+                               "  1: ai vs ai\n"
+                               "  2: player vs ai\n"
+                               "  3: player vs player\n"
+                               "  4: quit\n")
+                option = int(option)
+
+                if option == 1:
+                    player1option = choices[aiChoice()]
+                    player2option = choices[aiChoice()]
+                    break
+                elif option == 2:
+                    player1option = choices[playerChoice()]
+                    player2option = choices[aiChoice()]
+                    break
+                elif option == 3:
+                    player1option = choices[playerChoice()]
+                    player2option = choices[playerChoice()]
+                    break
+                else:
+                    print("Learn how to read, Idiot.")
+                    time.sleep(3)
+
+            except (ValueError, TypeError):
+                print("That ain't gonna work here.\n")
+                time.sleep(3)
+                os.system('cls')
+
+        # BATTLE GAME
         player1health = 20
         player2health = 20
         print("Player 1 gets to go first.")
         time.sleep(2)
+
         while True:
             os.system('cls')
+
             oneattack = tackle()
-            oneattack = str(oneattack)
             twoattack = tackle()
-            twoattack = str(twoattack)
-            print(player1health,player2health)
-            print("Rock did " + oneattack + " damage.\n")
+            print(player1health, player2health)
+            print(player1option + " did " + oneattack + " damage.\n")
             time.sleep(3)
             oneattack = int(oneattack)
             player2health = player2health - oneattack
+
             if player1health > 0 and player2health <= 0:
                 print("Player 1 wins!\n")
                 time.sleep(3)
                 break
-            print("Paper did " + twoattack + " damage.\n")
+
+            print(player2option + " did " + twoattack + " damage.\n")
             time.sleep(3)
             twoattack = int(twoattack)
             player1health = player1health - twoattack
+
             if player2health > 0 and player1health <= 0:
                 print("Player 2 wins!")
                 time.sleep(3)
                 break
-
-
-
 
     elif gameType == 3:
         os.system('cls')
