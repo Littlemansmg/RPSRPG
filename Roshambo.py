@@ -30,8 +30,9 @@ import os
 # vars
 choices = ["Rock", "Paper", "Scissors"]
 
+# REGULAR GAME FUNCTIONS
 
-#function is calling other functions and returns nothing.
+# function is calling other functions and returns nothing.
 def gameOption(option):
     if option == 1:
         #ai game
@@ -43,13 +44,13 @@ def gameOption(option):
         #2 player game
         finisher(playerChoice(),playerChoice())
 
-#callable function to get ai choice
+# callable function to get ai choice
 def aiChoice():
     a1 = rand.randint(0, 2)
     print(choices[a1])
     return a1
 
-#callable fucntion to get user choice
+# callable fucntion to get user choice
 def playerChoice():
     pPick = input("What do you pick?\n"
                   "Rock: 1\n"
@@ -58,7 +59,7 @@ def playerChoice():
     pPick = int(pPick) -1
     return pPick
 
-#winning logic that requires 2 paramaters.
+# winning logic that requires 2 paramaters.
 def finisher(player1, player2):
     # Rock wins
     if player1 == 0 and player2 == 2:
@@ -88,14 +89,29 @@ def finisher(player1, player2):
     else:
         print("The Players tied!")
 
+# BATTLE GAME FUNCTIONS
 
-#PROGRAM RUN
+def rock():
+    attack = rand.randrange(5, 10)
+    return attack
 
-#Decide between regular game and RPG battle
+def paper():
+    health = 50
+    attack = rand.randrange(5, 10)
+    return attack
+
+def scissors():
+    health = 50
+    attack = rand.randrange(5, 10)
+    return attack
+
+# PROGRAM RUN
+
+# Decide between regular game and RPG battle
 while True:
     os.system('cls')
 
-    #catch a user error if they put in a letter or a wrong value
+    # catch a user error if they put in a letter or a wrong value
     try:
         gameType = input("What type of game would you like to play?\n"
                          "  1: Regular Rock paper Scissors\n"
@@ -123,7 +139,7 @@ while True:
                                "  4: quit\n")
                 option = int(option)
 
-                #passes option to the gameOption function or quits.
+                # passes option to the gameOption function or quits.
                 if option < 4 and option > 0:
                     gameOption(option)
                 elif option == 4:
@@ -136,14 +152,43 @@ while True:
                 os.system('cls')
 
     elif gameType == 2:
-        #Battle game
-        print("You got the fighting game!")
+        os.system('cls')
+        # Battle game
+        player1health = 20
+        player2health = 20
+        print("Player 1 gets to go first.")
+        time.sleep(2)
+        while True:
+            os.system('cls')
+            oneattack = rock()
+            oneattack = str(oneattack)
+            twoattack = paper()
+            twoattack = str(twoattack)
+            print(player1health,player2health)
+            print("Rock did " + oneattack + " damage.\n")
+            time.sleep(3)
+            oneattack = int(oneattack)
+            player2health = player2health - oneattack
+            if player1health > 0 and player2health <= 0:
+                print("Player 1 wins!\n")
+                time.sleep(3)
+                break
+            print("Paper did " + twoattack + " damage.\n")
+            time.sleep(3)
+            twoattack = int(twoattack)
+            player1health = player1health - twoattack
+            if player2health > 0 and player1health <= 0:
+                print("Player 2 wins!")
+                time.sleep(3)
+                break
+
+
+
 
     elif gameType == 3:
+        os.system('cls')
         break
 
     else:
         print("Learn to read.")
         time.sleep(3)
-
-
