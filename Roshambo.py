@@ -11,8 +11,8 @@ RPSRPG created by Scott Goes 11/2/2017
   DONE 3. 2 player option
   FUCKED 4. OPTIONAL GUI
   5. RPG Aspects
-    A. Health and Damage
-    B. Bonuses against each other ex. rock stronger than paper
+    DONE A. Health and Damage
+    B. Bonuses against each other ex. rock weaker than paper
     C. Critical hits
 
 Runs functions/classes from another python file.
@@ -102,6 +102,18 @@ def finisher(player1, player2):
 
 # BATTLE GAME FUNCTIONS
 
+def winner (p1Health, p2Health):
+    close = 1
+    if p1Health > 0 and p2Health <= 0:
+        print("Player 1 wins!\n")
+        time.sleep(3)
+        close = 0
+    elif p2Health > 0 and p1Health <= 0:
+        print("Player 2 wins!\n")
+        time.sleep(3)
+        close = 0
+    return close
+
 def tackle():
     attack = rand.randrange(5, 10)
     attack = str(attack)
@@ -109,8 +121,8 @@ def tackle():
 
 # PROGRAM RUN
 
-# Decide between regular game and RPG battle
 while True:
+    # Decide between regular game and RPG battle
     os.system('cls')
 
     # catch a user error if they put in a letter or a wrong value
@@ -167,55 +179,56 @@ while True:
                 if option == 1:
                     player1option = choices[aiChoice()]
                     player2option = choices[aiChoice()]
-                    break
                 elif option == 2:
                     player1option = choices[playerChoice()]
                     player2option = choices[aiChoice()]
-                    break
                 elif option == 3:
                     player1option = choices[playerChoice()]
                     player2option = choices[playerChoice()]
+                elif option == 4:
                     break
                 else:
                     print("Learn how to read, Idiot.")
                     time.sleep(3)
+                    continue
 
             except (ValueError, TypeError):
                 print("That ain't gonna work here.\n")
                 time.sleep(3)
                 os.system('cls')
+            if player1option != "":
+                # BATTLE GAME
+                player1health = 20
+                player2health = 20
+                print("Player 1 gets to go first.")
+                time.sleep(2)
 
-        # BATTLE GAME
-        player1health = 20
-        player2health = 20
-        print("Player 1 gets to go first.")
-        time.sleep(2)
+                while True:
+                    os.system('cls')
 
-        while True:
-            os.system('cls')
+                    oneattack = tackle()
+                    twoattack = tackle()
+                    print(player1health, player2health)
+                    print(player1option + " did " + oneattack + " damage.\n")
+                    time.sleep(3)
+                    oneattack = int(oneattack)
+                    player2health = player2health - oneattack
 
-            oneattack = tackle()
-            twoattack = tackle()
-            print(player1health, player2health)
-            print(player1option + " did " + oneattack + " damage.\n")
-            time.sleep(3)
-            oneattack = int(oneattack)
-            player2health = player2health - oneattack
+                    end = winner(player1health, player2health)
 
-            if player1health > 0 and player2health <= 0:
-                print("Player 1 wins!\n")
-                time.sleep(3)
-                break
+                    if end == 0:
+                        break
 
-            print(player2option + " did " + twoattack + " damage.\n")
-            time.sleep(3)
-            twoattack = int(twoattack)
-            player1health = player1health - twoattack
+                    # This "not defined" BS doesn't break anything for some reason.
+                    print(player2option + " did " + twoattack + " damage.\n")
+                    time.sleep(3)
+                    twoattack = int(twoattack)
+                    player1health = player1health - twoattack
 
-            if player2health > 0 and player1health <= 0:
-                print("Player 2 wins!")
-                time.sleep(3)
-                break
+                    end = winner(player1health, player2health)
+
+                    if end == 0:
+                        break
 
     elif gameType == 3:
         os.system('cls')
