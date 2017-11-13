@@ -32,6 +32,32 @@ choices = ["Rock", "Paper", "Scissors"]
 
 # REGULAR GAME FUNCTIONS
 
+# PLAY REGULAR GAME
+def regularGame():
+    while True:
+        os.system('cls')
+
+        # catch a user error if they put in a letter or a wrong value
+        try:
+            option = input("How would you like to play?\n"
+                           "  1: ai vs ai\n"
+                           "  2: player vs ai\n"
+                           "  3: player vs player\n"
+                           "  4: quit\n")
+            option = int(option)
+
+            # passes option to the regGameOption function or quits.
+            if option < 4 and option > 0:
+                regGameOption(option)
+            elif option == 4:
+                break
+            else:
+                print("Learn how to read, Idiot.")
+        except (ValueError, TypeError):
+            print("That ain't gonna work here.\n")
+            time.sleep(3)
+            os.system('cls')
+
 # function is calling other functions and returns nothing.
 def regGameOption(option):
     if option == 1:
@@ -102,6 +128,109 @@ def finisher(player1, player2):
 
 # BATTLE GAME FUNCTIONS
 
+# PLAY BATTLE GAME
+def battleGame():
+
+    while True:
+        os.system('cls')
+        try:
+            option = input("How would you like to play?\n"
+                           "  1: ai vs ai\n"
+                           "  2: player vs ai\n"
+                           "  3: player vs player\n"
+                           "  4: quit\n")
+            option = int(option)
+
+            if option == 1:
+                player1option = choices[aiChoice()]
+                player2option = choices[aiChoice()]
+            elif option == 2:
+                player1option = choices[playerChoice()]
+                player2option = choices[aiChoice()]
+            elif option == 3:
+                player1option = choices[playerChoice()]
+                player2option = choices[playerChoice()]
+            elif option == 4:
+                break
+            else:
+                print("Learn how to read, Idiot.")
+                time.sleep(3)
+                continue
+
+        except (ValueError, TypeError):
+            print("That ain't gonna work here.\n")
+            time.sleep(3)
+            os.system('cls')
+        if player1option != "":
+            # BATTLE GAME
+            player1health = 20
+            player2health = 20
+            try:
+                order = input("Who gets to go first, Player 1 or Player 2? (Type 1 / 2)\n")
+                order = int(order)
+                if order == 1:
+                    first = player1option
+                    second = player2option
+                else:
+                    first = player2option
+                    second = player1option
+            except:
+                print("Learn to read.")
+                time.sleep(2)
+                break
+
+            while True:
+                os.system('cls')
+
+                if first == player1option and second == player2option:
+                    oneattack = tackle()
+                    twoattack = tackle()
+                    print(player1health, player2health)
+                    print(first + " did " + oneattack + " damage.\n")
+                    time.sleep(3)
+                    oneattack = int(oneattack)
+                    player2health = player2health - oneattack
+
+                    end = winner(player1health, player2health)
+
+                    if end == 0:
+                        break
+
+                    print(second + " did " + twoattack + " damage.\n")
+                    time.sleep(3)
+                    twoattack = int(twoattack)
+                    player1health = player1health - twoattack
+
+                    end = winner(player1health, player2health)
+
+                    if end == 0:
+                        break
+
+                if first == player2option and second == player1option:
+                    oneattack = tackle()
+                    twoattack = tackle()
+                    print(player1health, player2health)
+                    print(first + " did " + oneattack + " damage.\n")
+                    time.sleep(3)
+                    oneattack = int(oneattack)
+                    player1health = player1health - oneattack
+
+                    end = winner(player1health, player2health)
+
+                    if end == 0:
+                        break
+
+                    print(second + " did " + twoattack + " damage.\n")
+                    time.sleep(3)
+                    twoattack = int(twoattack)
+                    player2health = player2health - twoattack
+
+                    end = winner(player1health, player2health)
+
+                    if end == 0:
+                        break
+
+
 def winner (p1Health, p2Health):
     close = 1
     if p1Health > 0 and p2Health <= 0:
@@ -139,96 +268,10 @@ while True:
 
     # Run Game 1, 2 or quit
     if gameType == 1:
-
-        # REGULAR GAME
-        while True:
-            os.system('cls')
-
-            # catch a user error if they put in a letter or a wrong value
-            try:
-                option = input("How would you like to play?\n"
-                               "  1: ai vs ai\n"
-                               "  2: player vs ai\n"
-                               "  3: player vs player\n"
-                               "  4: quit\n")
-                option = int(option)
-
-                # passes option to the regGameOption function or quits.
-                if option < 4 and option > 0:
-                    regGameOption(option)
-                elif option == 4:
-                    break
-                else:
-                    print("Learn how to read, Idiot.")
-            except (ValueError, TypeError):
-                print("That ain't gonna work here.\n")
-                time.sleep(3)
-                os.system('cls')
+        regularGame()
 
     elif gameType == 2:
-        os.system('cls')
-        while True:
-            try:
-                option = input("How would you like to play?\n"
-                               "  1: ai vs ai\n"
-                               "  2: player vs ai\n"
-                               "  3: player vs player\n"
-                               "  4: quit\n")
-                option = int(option)
-
-                if option == 1:
-                    player1option = choices[aiChoice()]
-                    player2option = choices[aiChoice()]
-                elif option == 2:
-                    player1option = choices[playerChoice()]
-                    player2option = choices[aiChoice()]
-                elif option == 3:
-                    player1option = choices[playerChoice()]
-                    player2option = choices[playerChoice()]
-                elif option == 4:
-                    break
-                else:
-                    print("Learn how to read, Idiot.")
-                    time.sleep(3)
-                    continue
-
-            except (ValueError, TypeError):
-                print("That ain't gonna work here.\n")
-                time.sleep(3)
-                os.system('cls')
-            if player1option != "":
-                # BATTLE GAME
-                player1health = 20
-                player2health = 20
-                print("Player 1 gets to go first.")
-                time.sleep(2)
-
-                while True:
-                    os.system('cls')
-
-                    oneattack = tackle()
-                    twoattack = tackle()
-                    print(player1health, player2health)
-                    print(player1option + " did " + oneattack + " damage.\n")
-                    time.sleep(3)
-                    oneattack = int(oneattack)
-                    player2health = player2health - oneattack
-
-                    end = winner(player1health, player2health)
-
-                    if end == 0:
-                        break
-
-                    # This "not defined" BS doesn't break anything for some reason.
-                    print(player2option + " did " + twoattack + " damage.\n")
-                    time.sleep(3)
-                    twoattack = int(twoattack)
-                    player1health = player1health - twoattack
-
-                    end = winner(player1health, player2health)
-
-                    if end == 0:
-                        break
+        battleGame()
 
     elif gameType == 3:
         os.system('cls')
