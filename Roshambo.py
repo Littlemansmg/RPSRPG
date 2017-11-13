@@ -26,7 +26,7 @@ Runs functions/classes from another python file.
 import random as rand
 import time
 import os
-
+import RPG
 # vars
 choices = ["Rock", "Paper", "Scissors"]
 
@@ -36,8 +36,6 @@ choices = ["Rock", "Paper", "Scissors"]
 def regularGame():
     while True:
         os.system('cls')
-
-        # catch a user error if they put in a letter or a wrong value
         try:
             option = input("How would you like to play?\n"
                            "  1: ai vs ai\n"
@@ -46,7 +44,6 @@ def regularGame():
                            "  4: quit\n")
             option = int(option)
 
-            # passes option to the regGameOption function or quits.
             if option < 4 and option > 0:
                 regGameOption(option)
             elif option == 4:
@@ -163,7 +160,8 @@ def battleGame():
             os.system('cls')
         if player1option != "":
             # BATTLE GAME
-            player1health = 20
+
+            # player1health = 20
             player2health = 20
             try:
                 order = input("Who gets to go first, Player 1 or Player 2? (Type 1 / 2)\n")
@@ -185,13 +183,13 @@ def battleGame():
                 if first == player1option and second == player2option:
                     oneattack = tackle()
                     twoattack = tackle()
-                    print(player1health, player2health)
+                    print(RPG.rock.health, player2health)
                     print(first + " did " + oneattack + " damage.\n")
                     time.sleep(3)
                     oneattack = int(oneattack)
                     player2health = player2health - oneattack
 
-                    end = winner(player1health, player2health)
+                    end = winner(RPG.rock.health, player2health)
 
                     if end == 0:
                         break
@@ -199,9 +197,9 @@ def battleGame():
                     print(second + " did " + twoattack + " damage.\n")
                     time.sleep(3)
                     twoattack = int(twoattack)
-                    player1health = player1health - twoattack
+                    RPG.rock.health = RPG.rock.health - twoattack
 
-                    end = winner(player1health, player2health)
+                    end = winner(RPG.rock.health, player2health)
 
                     if end == 0:
                         break
@@ -209,13 +207,13 @@ def battleGame():
                 if first == player2option and second == player1option:
                     oneattack = tackle()
                     twoattack = tackle()
-                    print(player1health, player2health)
+                    print(RPG.rock.health, player2health)
                     print(first + " did " + oneattack + " damage.\n")
                     time.sleep(3)
                     oneattack = int(oneattack)
-                    player1health = player1health - oneattack
+                    RPG.rock.health = RPG.rock.health - oneattack
 
-                    end = winner(player1health, player2health)
+                    end = winner(RPG.rock.health, player2health)
 
                     if end == 0:
                         break
@@ -225,7 +223,7 @@ def battleGame():
                     twoattack = int(twoattack)
                     player2health = player2health - twoattack
 
-                    end = winner(player1health, player2health)
+                    end = winner(RPG.rock.health, player2health)
 
                     if end == 0:
                         break
