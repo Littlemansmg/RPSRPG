@@ -1,10 +1,7 @@
 '''
-Class example
+Battle_objects.py (previously RPG.py) created by Scottie Goes on 11/14/17
 
-class helloWorld:
-
-    def f(self):
-        return 'I\'m from the other .py file'
+This file is for running multiple aspects of the battle game, and clears up some code.
 '''
 import random as rand
 

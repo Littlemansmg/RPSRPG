@@ -1,4 +1,11 @@
+"""
+Battle.py created by Scottie Goes on 11/14/17
 
+This file is separating the regular and the battle game to make for some cleaner code.
+
+TODO
+ DONE 1. Health and Damage
+"""
 
 import time
 import os
