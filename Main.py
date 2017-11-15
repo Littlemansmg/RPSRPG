@@ -35,7 +35,7 @@ while True:
         Roshambo.regularGame()
 
     elif gameType == 2:
-        Battle.battleGame()
+        Battle.battleMenu()
 
     elif gameType == 3:
         os.system('cls')

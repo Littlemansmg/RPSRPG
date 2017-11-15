@@ -5,15 +5,22 @@ This file is separating the regular and the battle game to make for some cleaner
 
 TODO
  DONE 1. Health and Damage
+ 2. Defence calculating
+ 3. Advantages
+ 4. Crits
+ 5. Idk. probably something to do with penis.
 """
 
 import time
 import os
 import Roshambo as REG
 import Battle_objects
+from Battle_objects import rock as ROCK
+from Battle_objects import paper as PAPER
+from Battle_objects import scissors as SCISSORS
 
 # PLAY BATTLE GAME
-def battleGame():
+def battleMenu():
 
     while True:
         os.system('cls')
@@ -47,18 +54,18 @@ def battleGame():
             os.system('cls')
         if player1option != "":
             # BATTLE GAME
-            player1health = deterHealth(player1option)
-            player2health = deterHealth(player2option)
+            PLAYER1 = deterObj(player1option)
+            PLAYER2 = deterObj(player2option)
             try:
                 order = input("Who gets to go first, Player 1 or Player 2? (Type 1 / 2)\n")
                 order = int(order)
                 if order == 1:
                     first = player1option
                     second = player2option
-                else:
+                elif order == 2:
                     first = player2option
                     second = player1option
-            except:
+            except(ValueError, TypeError):
                 print("Learn to read.")
                 time.sleep(2)
                 break
@@ -70,23 +77,23 @@ def battleGame():
                     tmpattack = Battle_objects.attacks()
                     oneattack = tmpattack.tackle()
                     twoattack = tmpattack.struggle()
-                    print(player1health, player2health)
-                    print(first + " did " + oneattack + " damage.\n")
+                    print(PLAYER1.health, PLAYER2.health)
+                    print(PLAYER1.name + " did " + oneattack + " damage.\n")
                     time.sleep(3)
                     oneattack = int(oneattack)
-                    player2health = player2health - oneattack
+                    PLAYER2.health -= oneattack
 
-                    end = winner(player1health, player2health)
+                    end = winner(PLAYER1.health, PLAYER2.health)
 
                     if end == 0:
                         break
 
-                    print(second + " did " + twoattack + " damage.\n")
+                    print(PLAYER2.name + " did " + twoattack + " damage.\n")
                     time.sleep(3)
                     twoattack = int(twoattack)
-                    player1health = player1health - twoattack
+                    PLAYER1.health -= twoattack
 
-                    end = winner(player1health, player2health)
+                    end = winner(PLAYER1.health, PLAYER2.health)
 
                     if end == 0:
                         break
@@ -95,34 +102,36 @@ def battleGame():
                     tmpattack = Battle_objects.attacks()
                     oneattack = tmpattack.tackle()
                     twoattack = tmpattack.struggle()
-                    print(player1health, player2health)
-                    print(first + " did " + oneattack + " damage.\n")
+                    print(PLAYER1.health, PLAYER2.health)
+                    print(PLAYER2.name + " did " + oneattack + " damage.\n")
                     time.sleep(3)
                     oneattack = int(oneattack)
-                    player1health = player1health - oneattack
+                    PLAYER1.health -= oneattack
 
-                    end = winner(player1health, player2health)
+                    end = winner(PLAYER1.health, PLAYER2.health)
 
                     if end == 0:
                         break
 
-                    print(second + " did " + twoattack + " damage.\n")
+                    print(PLAYER2.name + " did " + twoattack + " damage.\n")
                     time.sleep(3)
                     twoattack = int(twoattack)
-                    player2health = player2health - twoattack
+                    PLAYER2.health -= twoattack
 
-                    end = winner(player1health, player2health)
+                    end = winner(PLAYER1.health, PLAYER1.health)
 
                     if end == 0:
                         break
 
-def deterHealth(option):
+
+
+def deterObj(option):
     if option == "Rock":
-        return Battle_objects.rock.health
+        return ROCK()
     elif option == "Paper":
-        return Battle_objects.paper.health
+        return PAPER()
     elif option == "Scissors":
-        return Battle_objects.scissors.health
+        return SCISSORS()
 
 def winner (p1Health, p2Health):
     close = 1

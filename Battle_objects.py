@@ -30,3 +30,11 @@ class attacks:
         self = rand.randrange(1, 4)
         self = str(self)
         return self
+
+    def defend(self):
+        print("Shrug")
+
+    def death(self):
+        self = 100
+        self = str(self)
+        return self
