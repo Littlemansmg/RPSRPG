@@ -5,7 +5,7 @@ This file is separating the regular and the battle game to make for some cleaner
 
 TODO
  DONE 1. Health and Damage
- 2. Defence calculating
+ DONE 2. Defence calculating
  3. Advantages
  4. Crits
  5. Idk. probably something to do with penis.
@@ -76,11 +76,11 @@ def battleMenu():
                 if first == player1option and second == player2option:
                     tmpattack = Battle_objects.attacks()
                     oneattack = tmpattack.tackle()
-                    twoattack = tmpattack.struggle()
+                    twoattack = tmpattack.tackle()
                     print(PLAYER1.health, PLAYER2.health)
                     print(PLAYER1.name + " did " + oneattack + " damage.\n")
                     time.sleep(3)
-                    oneattack = int(oneattack)
+                    oneattack = int(oneattack) - PLAYER2.defence
                     PLAYER2.health -= oneattack
 
                     end = winner(PLAYER1.health, PLAYER2.health)
@@ -90,7 +90,7 @@ def battleMenu():
 
                     print(PLAYER2.name + " did " + twoattack + " damage.\n")
                     time.sleep(3)
-                    twoattack = int(twoattack)
+                    twoattack = int(twoattack) - PLAYER1.defence
                     PLAYER1.health -= twoattack
 
                     end = winner(PLAYER1.health, PLAYER2.health)
@@ -106,7 +106,7 @@ def battleMenu():
                     print(PLAYER2.name + " did " + oneattack + " damage.\n")
                     time.sleep(3)
                     oneattack = int(oneattack)
-                    PLAYER1.health -= oneattack
+                    PLAYER1.health = twoattack - PLAYER1.defence
 
                     end = winner(PLAYER1.health, PLAYER2.health)
 
@@ -116,7 +116,7 @@ def battleMenu():
                     print(PLAYER2.name + " did " + twoattack + " damage.\n")
                     time.sleep(3)
                     twoattack = int(twoattack)
-                    PLAYER2.health -= twoattack
+                    PLAYER2.health = oneattack - PLAYER2.defence
 
                     end = winner(PLAYER1.health, PLAYER1.health)
 
